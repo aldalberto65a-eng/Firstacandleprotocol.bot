@@ -38,6 +38,8 @@ def calculate_ema(prices, period=14):
         ema = price * k + ema * (1 - k)
     return ema
 
+send_message("🧪 Engine is alive")
+
 def run_engine():
     data = get_data()
     if not data:
