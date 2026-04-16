@@ -60,14 +60,16 @@ def run_engine():
         return
         if not state["range_built"]:
     state_name = "BUILDING RANGE"
+
 elif not state["breakout"]:
     state_name = "WAITING BREAKOUT"
+
 elif not state["ema_ok"]:
     state_name = "WAITING EMA CONFIRMATION"
+
 else:
     state_name = "WAITING RETEST"
-send_debug(
-    price,
+
     state["range_high"],
     state["range_low"],
     ema if 'ema' in locals() else None,
