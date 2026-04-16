@@ -1,3 +1,19 @@
+DEBUG = True
+def send_debug(price, high, low, ema, state_name):
+    if not DEBUG:
+        return
+
+    msg = (
+        f"📊 DEBUG UPDATE\n"
+        f"Price: {price}\n"
+        f"Range High: {high}\n"
+        f"Range Low: {low}\n"
+        f"EMA: {ema}\n"
+        f"State: {state_name}"
+    )
+
+    send_message(msg)
+
 from flask import Flask
 import requests
 import os
@@ -42,6 +58,22 @@ def run_engine():
     data = get_data()
     if not data:
         return
+        if not state["range_built"]:
+    state_name = "BUILDING RANGE"
+elif not state["breakout"]:
+    state_name = "WAITING BREAKOUT"
+elif not state["ema_ok"]:
+    state_name = "WAITING EMA CONFIRMATION"
+else:
+    state_name = "WAITING RETEST"
+send_debug(
+    price,
+    state["range_high"],
+    state["range_low"],
+    ema if 'ema' in locals() else None,
+    state_name
+)
+
 
     closes = [float(v["4. close"]) for v in data.values()]
     if len(closes) < 40:
