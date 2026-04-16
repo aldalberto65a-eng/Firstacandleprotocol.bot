@@ -1,15 +1,13 @@
-import requests
+from flask import Flask
+import os
 
-TOKEN = "YOUR_BOT_TOKEN"
-CHAT_ID = 7486981713   # your personal chat id (no quotes needed here is fine)
+app = Flask(__name__)
 
-url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+@app.route("/")
+def home():
+    return "Bot is running"
 
-r = requests.post(url, json={
-    "chat_id": CHAT_ID,
-    "text": "🧪 DIRECT TEST FROM LOCAL MACHINE"
-})
-
-print(r.text)
-
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
