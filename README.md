@@ -1,0 +1,1 @@
+# Firstacandleprotocol.bot
